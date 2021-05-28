@@ -12,13 +12,12 @@ struct TaylorMapNd{T} <: AbstractVector{T}
     end
 end
 
-function Base.size(z::TaylorMapNd)
-	Base.size(z.tpsc)
-end
+Base.size(z::TaylorMapNd)=z.dim
+Base.IndexStyle(::Type{<:TaylorMapNd})=IndexLinear()
 
-function Base.getindex(z::TaylorMapNd, i::Int)
-	Base.getindex(z.tpsc,i)
-end
+Base.getindex(z::TaylorMapNd, i::Int)=Base.getindex(z.tpsc,i)
+Base.setindex!(z::TaylorMapNd, v, i::Int)=(z.tpsc[i]=v)
+
 
 function get_linear_map(z::TaylorMapNd{T}) where {T}
     linmap=Array{Float64, 2}(undef, z.dim, z.dim)
