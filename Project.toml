@@ -1,0 +1,7 @@
+name = "TaylorMap"
+uuid = "5d7cd3f2-bc5d-447c-a329-777cfc8f0d33"
+authors = ["yuehao <yuehao@msn.com>"]
+version = "0.1.0"
+
+[deps]
+TaylorSeries = "6aa5eb33-94cf-58f4-a9d0-e4b2c4fc25ea"
