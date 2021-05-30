@@ -1,7 +1,7 @@
 module TaylorMap
 
 using TaylorSeries
-export TaylorMapNd
+export TaylorMapNd, getlinearmap
 
 struct TaylorMapNd{T} <: AbstractVector{T} 
     dim::UInt8
@@ -12,14 +12,14 @@ struct TaylorMapNd{T} <: AbstractVector{T}
     end
 end
 
-Base.size(z::TaylorMapNd)=z.dim
+Base.size(z::TaylorMapNd)=Base.size(z.tpsc)
 Base.IndexStyle(::Type{<:TaylorMapNd})=IndexLinear()
 
 Base.getindex(z::TaylorMapNd, i::Int)=Base.getindex(z.tpsc,i)
 Base.setindex!(z::TaylorMapNd, v, i::Int)=(z.tpsc[i]=v)
 
 
-function get_linear_map(z::TaylorMapNd{T}) where {T}
+function getlinearmap(z::TaylorMapNd)
     linmap=Array{Float64, 2}(undef, z.dim, z.dim)
     for i = 1:z.dim
         linmap[i,:]=z.tpsc[i].coeffs[2].coeffs
